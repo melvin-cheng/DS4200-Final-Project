@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>All Visualizations — Pizza Report</title>
+    <link rel="stylesheet" href="./main.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <div class="brand">
+          <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
+          <div class="brand-text"><div class="site-title">Pizza Report</div><div class="site-tag">All visualizations</div></div>
+        </div>
+        <nav class="main-nav">
+          <a href="./index.html">Home</a>
+          <a class="cta" href="./visualizations.html">All visualizations</a>
+          <a href="./heatmap_orders.html">Heatmap</a>
+          <a href="./size_contribution_by_sales.html">Size contribution</a>
+          <a href="./top_pizza_by_revenue.html">Top pizzas</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="overview">
+          <h1>All visualizations</h1>
+          <p class="short" style="margin:6px 0 8px 0; color:var(--muted)">Browse each chart and its supporting description below — click a card to open the detailed page for any visualization.</p>
+
+          <div class="viz-links">
+            <a class="viz-link" href="./heatmap_orders.html">
+              <img src="./heatmap_orders.jpg" alt="Heatmap preview">
+              <div class="title">Heatmap — Orders</div>
+              <div class="short">Order volume by day/time — shows weekday lunchtime peaks and evening clusters.</div>
+            </a>
+
+            <a class="viz-link" href="./size_contribution_by_sales.html">
+              <img src="./size_contribution_by_sales.jpg" alt="Size contribution preview">
+              <div class="title">Size / Revenue Contribution</div>
+              <div class="short">Stacked bar chart — larger sizes (M/L) drive most revenue.</div>
+            </a>
+
+            <a class="viz-link" href="./top_pizza_by_revenue.html">
+              <img src="./top_pizza_by_revenue.jpg" alt="Top pizza preview">
+              <div class="title">Top pizzas by revenue</div>
+              <div class="short">Top 5 pizzas ranked by revenue (easy comparison).</div>
+            </a>
+          </div>
+
+        </section>
+
+        <!-- Embedded interactive visualization -->
+        <section id="unitprice" class="viz-section">
+          <h2 style="margin:14px 0 8px 0">Unit price visualization</h2>
+          <p style="margin:0 0 6px 0; color:#666; font-size:13px">Interactive Altair visualization (same content as the single-page export).</p>
+          <p class="desc">Altair — This Altair figure links pizza prices with ingredient demand to help explore patterns in the menu. The scatter plot on the left shows the unit price of every pizza by category. This shows how Classic pizzas cluster tightly around mid-range prices, and Chicken and Supreme pizzas show more differences. When the x-axis is dragged to highlight a specific price range, the bar chart on the right updates to show the top five ingredients used in the pizzas within that selected price window, along with the total quantities sold. This interaction makes it easy to see which ingredients appear most often in higher-priced pizzas versus lower-priced ones, and how ingredient popularity shifts across categories and price points. Overall, the graph helps connect pricing, category differences, and topping demand in one combined view.</p>
+
+          <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html" title="Unit price visualization">
+            Your browser does not support iframes — <a href="./pizza_unitprice_ingredients.html">open visualization</a>
+          </iframe>
+        </section>
+
+      </main>
+    </div>
+  </body>
+
+  <!-- iframe autosize/scale helper removed as requested -->
+</html>

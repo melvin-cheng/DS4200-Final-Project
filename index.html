@@ -3,11 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-<<<<<<< HEAD
     <title>Pizza Report — Home</title>
-=======
-    <title>Pizza Images</title>
->>>>>>> 3620b4a3eae2ef508736bb59a5ec34dd894c0655
     <link rel="stylesheet" href="./main.css">
   </head>
   <body>
@@ -15,34 +11,19 @@
       <header class="site-header">
         <div class="brand">
           <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
-<<<<<<< HEAD
           <div class="brand-text"><div class="site-title">Pizza Report</div><div class="site-tag">Data-driven insights on pizza sales</div></div>
         </div>
 
         <nav class="main-nav">
           <a href="./index.html">Home</a>
+          <a class="cta" href="./visualizations.html">All visualizations</a>
           <a href="./heatmap_orders.html">Heatmap (orders)</a>
           <a href="./size_contribution_by_sales.html">Size contribution</a>
           <a href="./top_pizza_by_revenue.html">Top pizzas</a>
-          <a class="cta" href="./pizza_unitprice_ingredients.html" target="_blank">Unit-price viz</a>
-=======
-          <div class="brand-text">
-            <div class="site-title">Pizza Report</div>
-            <div class="site-tag"></div>
-          </div>
-        </div>
-
-        <nav class="main-nav">
-          <a href="#">Home</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#html-images">Interactive Visualizations</a>
-          <a class="cta" href="./pizza_unitprice_ingredients.html" target="_blank">Open visualization</a>
->>>>>>> 3620b4a3eae2ef508736bb59a5ec34dd894c0655
         </nav>
       </header>
 
       <main>
-<<<<<<< HEAD
         <section class="overview">
           <h2>Project overview</h2>
           <p>
@@ -66,30 +47,6 @@
             </div>
           </div>
 
-          <h3 style="margin-top:18px">Visualizations — link to each chart</h3>
-          <p class="short" style="margin:6px 0 8px 0; color:var(--muted)">All charts are on their own page — click any card below to view each chart and the detailed description.</p>
-
-          <div class="viz-links">
-            <a class="viz-link" href="./heatmap_orders.html">
-              <img src="./heatmap_orders.jpg" alt="Heatmap preview">
-              <div class="title">Heatmap — Orders</div>
-              <div class="short">Order volume by day/time — shows weekday lunchtime peaks and evening clusters.</div>
-            </a>
-
-            <a class="viz-link" href="./size_contribution_by_sales.html">
-              <img src="./size_contribution_by_sales.jpg" alt="Size contribution preview">
-              <div class="title">Size / Revenue Contribution</div>
-              <div class="short">Stacked bar chart — larger sizes (M/L) drive most revenue.</div>
-            </a>
-
-            <a class="viz-link" href="./top_pizza_by_revenue.html">
-              <img src="./top_pizza_by_revenue.jpg" alt="Top pizza preview">
-              <div class="title">Top pizzas by revenue</div>
-              <div class="short">Top 5 pizzas ranked by revenue (easy comparison).</div>
-            </a>
-          </div>
-        </section>
-
         <section class="findings" aria-label="Findings and future work">
           <h2>Findings</h2>
           <p>Overall, our visual analysis of the Pizza Restaurant Sales dataset helped us understand several important patterns in customer behavior and restaurant performance. One of the clearest findings is that large and medium pizzas bring in most of the revenue, which suggests that these sizes should continue to be the main focus of the menu. We also observed strong time-based patterns in the heatmap, especially the sharp increase in orders during the lunch hour and higher demand on Thursdays and Fridays — trends that suggest staff and prep should match those busy windows. Our category/ingredient analysis showed that certain pizza types rely heavily on specific ingredients and sizes, which can support smarter inventory planning.</p>
@@ -100,94 +57,6 @@
           </div>
         </section>
       </main>
-
-    <script>
-      // Try to auto-resize and scale an embedded same-origin iframe so it fits the container.
-      (function(){
-        const iframe = document.querySelector('.viz-frame');
-        if (!iframe) return;
-
-        function tryResize(){
-          try{
-            const doc = iframe.contentDocument || iframe.contentWindow.document;
-            if (!doc) return;
-
-            // compute sizes
-            const contentWidth = Math.max(doc.documentElement.scrollWidth || 0, doc.body.scrollWidth || 0);
-            const contentHeight = Math.max(doc.documentElement.scrollHeight || 0, doc.body.scrollHeight || 0);
-            const parentWidth = iframe.parentElement.clientWidth;
-
-            if (!contentWidth || !contentHeight) return;
-
-            // if content is wider than container, scale down to fit
-            if (contentWidth > parentWidth){
-              const scale = parentWidth / contentWidth;
-              // apply transform inside the iframe when same-origin
-              doc.body.style.transformOrigin = '0 0';
-              doc.body.style.transform = 'scale(' + scale + ')';
-              iframe.style.height = Math.ceil(contentHeight * scale) + 'px';
-            } else {
-              // reset any scaling and set height to fit
-              doc.body.style.transform = '';
-              iframe.style.height = Math.ceil(contentHeight) + 'px';
-            }
-          } catch(e){
-            // Access denied (cross-origin) or other error: fall back to default behaviour
-            console.debug('iframe autosize failed (cross-origin or error):', e && e.message);
-          }
-        }
-
-        // Try once when the iframe loads and then poll a few times to handle dynamic content
-        iframe.addEventListener('load', function(){
-          tryResize();
-          // poll for changes for 5 seconds
-          let tries = 20; // 20 * 250ms = 5s
-          const id = setInterval(()=>{
-            tryResize();
-            if (--tries <= 0) clearInterval(id);
-          }, 250);
-        });
-
-        // Immediately attempt resize in case it's already loaded
-        setTimeout(tryResize, 300);
-      })();
-    </script>
-=======
-        <section class="page-intro">
-          <h1>Pizza Visualizations</h1>
-        </section>
-
-        <section id="gallery" class="gallery">
-          <figure class="card">
-            <img src="./heatmap_orders.jpg" alt="Heatmap of orders" loading="lazy">
-            <figcaption class="caption">heatmap_orders.jpg</figcaption>
-            <p class="desc">This heatmap shows how order volume changes across the week and throughout each day. The darkest red blocks demonstrate that the highest order activity consistently occurs around 12 PM to 1 PM on weekdays, with Thursday and Friday showing the strongest midday peaks. A second noticeable cluster appears in the early evening between 5 PM and 7 PM, especially mid-week. Weekends have lighter colors overall, meaning lower and more evenly distributed order counts. Overall, the chart shows predictable lunchtime spikes during weekdays and mild evening activity later in the day.</p>
-          </figure>
-
-          <figure class="card">
-            <img src="./size_contribution_by_sales.jpg" alt="Size contribution by sales" loading="lazy">
-            <figcaption class="caption">size_contribution_by_sales.jpg</figcaption>
-            <p class="desc">This stacked bar chart compares how each pizza size contributes to total revenue within each category. Across all categories (Chicken, Classic, Supreme, and Veggie), the large (L) and medium (M) sizes make up the biggest share of revenue, shown by the wide yellow and orange sections. Small (S) pizzas consistently contribute the least, and XL and XXL sizes rarely appear. The Classic category has the highest total height, meaning it generates the most revenue overall. Overall, the chart shows that larger sizes dominate revenue regardless of pizza type.</p>
-          </figure>
-
-          <figure class="card">
-            <img src="./top_pizza_by_revenue.jpg" alt="Top pizza by revenue" loading="lazy">
-            <figcaption class="caption">top_pizza_by_revenue.jpg</figcaption>
-            <p class="desc">This horizontal ranking chart displays the five pizzas that generate the most revenue. The bars show that The Thai Chicken Pizza leads the list, followed closely by The Barbecue Chicken Pizza and The California Chicken Pizza. The Classic Deluxe Pizza and Spicy Italian Pizza come next with slightly lower totals. Sorted descending, the visualization makes it easy to compare performance and see that all five pizzas bring in strong revenue with only mild differences between them.</p>
-          </figure>
-        </section>
-
-      <!-- Embedded visualization: pizza_unitprice_ingredients.html -->
-      <section id="unitprice" class="viz-section">
-        <h2 style="margin:14px 0 8px 0">Unit price visualization</h2>
-        <p style="margin:0 0 6px 0; color:#666; font-size:13px">Interactive chart embedded below — you can also open it as a standalone page.</p>
-        <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html" title="Unit price visualization">
-          Your browser does not support iframes — <a href="./pizza_unitprice_ingredients.html">open visualization</a>
-        </iframe>
-      </section>
-
-      </main>
->>>>>>> 3620b4a3eae2ef508736bb59a5ec34dd894c0655
     </div>
   </body>
 </html>
