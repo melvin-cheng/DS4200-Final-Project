@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Heatmap — Orders</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <div class="brand">
+          <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
+          <div class="brand-text"><div class="site-title">Pizza Report</div><div class="site-tag">Heatmap - Orders</div></div>
+        </div>
+        <nav class="main-nav">
+          <a href="./index.html">Home</a>
+          <a href="./size_contribution_by_sales.html">Size contribution</a>
+          <a href="./top_pizza_by_revenue.html">Top pizzas</a>
+          <a class="cta" href="./pizza_unitprice_ingredients.html">Open unit price viz</a>
+        </nav>
+      </header>
+
+      <main>
+        <article class="card" style="padding:18px;">
+          <h1>Heatmap — Orders (Weekly / Daily)</h1>
+          <img src="./heatmap_orders.jpg" alt="Heatmap of orders" style="width:100%; height:auto; max-height:1200px; object-fit:contain; border-radius:8px;"/>
+          <p class="desc">This heatmap shows how order volume changes across the week and throughout each day. The darkest red blocks demonstrate that the highest order activity consistently occurs around 12 PM to 1 PM on weekdays, with Thursday and Friday showing the strongest midday peaks. A second noticeable cluster appears in the early evening between 5 PM and 7 PM, especially mid-week. Weekends have lighter colors overall, meaning lower and more evenly distributed order counts. Overall, the chart shows predictable lunchtime spikes during weekdays and mild evening activity later in the day.</p>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

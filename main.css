@@ -31,6 +31,11 @@ p.lead{ margin:0 0 18px 0; color:#555 }
 .card img{ display:block; width:100%; height:auto; max-height:1200px; object-fit:contain; border-radius:12px }
 .caption{ margin-top:16px; color:#666; font-size:15px }
 
+/* descriptive caption text for visualizations */
+.desc{ margin-top:10px; color:#444; font-size:14px; line-height:1.45; max-width:100%; text-align:left }
+.card .desc{ color:#444; font-size:14px; line-height:1.45; padding:0 10px; }
+
+
 /* responsive: medium screens — slightly smaller minimum card width */
 @media (max-width:1300px){
 	/* medium-large screens: slightly smaller cards */
@@ -60,4 +65,24 @@ p.lead{ margin:0 0 18px 0; color:#555 }
 .viz-frame{ width:100%; height:760px; border:0; border-radius:10px; box-shadow:0 12px 36px rgba(2,6,23,0.12); background:white }
 @media (max-width:980px){ .viz-frame{ height:560px } }
 @media (max-width:640px){ .viz-frame{ height:360px } }
+
+/* Home / overview styles */
+.overview{ background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:18px; border-radius:12px; box-shadow:var(--sm-shadow); margin-bottom:18px }
+.overview h2{ margin-top:0 }
+.references{ display:flex; flex-direction:column; gap:12px; margin-top:12px }
+.ref a{ color:var(--accent); font-weight:600; text-decoration:none }
+.ref p{ margin:6px 0 0 0; color:var(--muted); font-size:14px }
+
+.viz-links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:14px }
+.viz-link{ background:white; padding:10px; border-radius:10px; box-shadow:0 8px 28px rgba(2,6,23,0.06); display:flex; flex-direction:column; gap:8px; align-items:stretch }
+.viz-link img{ width:100%; object-fit:cover; border-radius:8px; height:180px }
+.viz-link .title{ font-weight:700 }
+.viz-link .short{ color:var(--muted); font-size:13px }
+
+/* Findings / future work */
+.findings{ margin-top:26px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:18px; border-radius:10px; box-shadow:var(--sm-shadow); }
+.findings h2{ margin-top:0 }
+.findings p{ color:var(--muted); line-height:1.45; margin:8px 0 }
+.findings .future{ margin-top:12px; padding-top:10px; border-top:1px dashed rgba(0,0,0,0.06); }
+
 
