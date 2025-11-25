@@ -66,6 +66,7 @@ p.lead{ margin:0 0 18px 0; color:#555 }
 @media (max-width:980px){ .viz-frame{ height:560px } }
 @media (max-width:640px){ .viz-frame{ height:360px } }
 
+<<<<<<< HEAD
 /* Home / overview styles */
 .overview{ background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:18px; border-radius:12px; box-shadow:var(--sm-shadow); margin-bottom:18px }
 .overview h2{ margin-top:0 }
@@ -86,3 +87,5 @@ p.lead{ margin:0 0 18px 0; color:#555 }
 .findings .future{ margin-top:12px; padding-top:10px; border-top:1px dashed rgba(0,0,0,0.06); }
 
 
+=======
+>>>>>>> 3620b4a3eae2ef508736bb59a5ec34dd894c0655
