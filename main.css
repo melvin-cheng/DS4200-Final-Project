@@ -1,0 +1,68 @@
+/* Page styles for index.html - Pizza Visualizations */
+:root{ font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#111 }
+body{ margin:0; padding:28px; background:#f7f7f7 }
+.container{ max-width:1100px; margin:0 auto }
+h1{ margin:0 0 6px 0 }
+p.lead{ margin:0 0 18px 0; color:#555 }
+
+/* ---------------- Header / navigation ---------------- */
+.site-header{ display:flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 0; border-bottom:1px solid rgba(17,17,17,0.06); margin-bottom:18px }
+.brand{ display:flex; align-items:center; gap:12px }
+.brand-logo{ width:56px; height:56px; border-radius:10px; object-fit:cover; display:block }
+.brand-text{ display:flex; flex-direction:column }
+.brand-text .site-title{ font-weight:700; font-size:18px; color:#111 }
+.brand-text .site-tag{ font-size:12px; color:#666 }
+.main-nav{ display:flex; gap:10px; align-items:center }
+.main-nav a{ padding:8px 12px; border-radius:8px; text-decoration:none; color:#333; font-weight:600 }
+.main-nav a:hover{ background:rgba(0,0,0,0.04) }
+.main-nav .cta{ background:linear-gradient(90deg,#3b82f6,#06b6d4); color:white; box-shadow:0 8px 20px rgba(59,130,246,0.12) }
+
+@media (max-width:640px){
+	.site-header{ flex-direction:column; align-items:flex-start; gap:8px }
+	.main-nav{ width:100%; justify-content:space-between }
+}
+h1{ margin:0 0 6px 0 }
+p.lead{ margin:0 0 18px 0; color:#555 }
+
+/* gallery grid */
+/* make gallery cards much larger on wide screens */
+.gallery{ display:grid; grid-template-columns: repeat(auto-fit, minmax(720px, 1fr)); gap:28px }
+.card{ background:white; padding:32px; border-radius:14px; box-shadow:0 18px 56px rgba(2,6,23,0.10); text-align:center }
+.card img{ display:block; width:100%; height:auto; max-height:1200px; object-fit:contain; border-radius:12px }
+.caption{ margin-top:16px; color:#666; font-size:15px }
+
+/* descriptive caption text for visualizations */
+.desc{ margin-top:10px; color:#444; font-size:14px; line-height:1.45; max-width:100%; text-align:left }
+.card .desc{ color:#444; font-size:14px; line-height:1.45; padding:0 10px; }
+
+
+/* responsive: medium screens — slightly smaller minimum card width */
+@media (max-width:1300px){
+	/* medium-large screens: slightly smaller cards */
+	.gallery{ grid-template-columns: repeat(auto-fit, minmax(560px, 1fr)); gap:20px }
+	.card{ padding:28px }
+	.card img{ max-height:960px }
+}
+
+@media (max-width:1000px){
+	/* medium screens */
+	.gallery{ grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap:18px }
+	.card{ padding:22px }
+	.card img{ max-height:700px }
+}
+
+/* responsive: mobile screens — single column, smaller padding */
+@media (max-width:640px){
+	body{ padding:14px }
+	.gallery{ grid-template-columns: 1fr; gap:10px }
+	.card{ padding:12px }
+	.card img{ max-height:560px }
+	.caption{ font-size:13px }
+}
+
+/* embedding/preview for external single-file visualizations */
+.viz-section{ margin-top:26px; display:flex; flex-direction:column; gap:8px }
+.viz-frame{ width:100%; height:760px; border:0; border-radius:10px; box-shadow:0 12px 36px rgba(2,6,23,0.12); background:white }
+@media (max-width:980px){ .viz-frame{ height:560px } }
+@media (max-width:640px){ .viz-frame{ height:360px } }
+

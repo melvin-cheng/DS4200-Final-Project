@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pizza Images</title>
+    <link rel="stylesheet" href="./main.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <div class="brand">
+          <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
+          <div class="brand-text">
+            <div class="site-title">Pizza Report</div>
+            <div class="site-tag"></div>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a href="#">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#html-images">Interactive Visualizations</a>
+          <a class="cta" href="./pizza_unitprice_ingredients.html" target="_blank">Open visualization</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-intro">
+          <h1>Pizza Visualizations</h1>
+        </section>
+
+        <section id="gallery" class="gallery">
+          <figure class="card">
+            <img src="./heatmap_orders.jpg" alt="Heatmap of orders" loading="lazy">
+            <figcaption class="caption">heatmap_orders.jpg</figcaption>
+            <p class="desc">This heatmap shows how order volume changes across the week and throughout each day. The darkest red blocks demonstrate that the highest order activity consistently occurs around 12 PM to 1 PM on weekdays, with Thursday and Friday showing the strongest midday peaks. A second noticeable cluster appears in the early evening between 5 PM and 7 PM, especially mid-week. Weekends have lighter colors overall, meaning lower and more evenly distributed order counts. Overall, the chart shows predictable lunchtime spikes during weekdays and mild evening activity later in the day.</p>
+          </figure>
+
+          <figure class="card">
+            <img src="./size_contribution_by_sales.jpg" alt="Size contribution by sales" loading="lazy">
+            <figcaption class="caption">size_contribution_by_sales.jpg</figcaption>
+            <p class="desc">This stacked bar chart compares how each pizza size contributes to total revenue within each category. Across all categories (Chicken, Classic, Supreme, and Veggie), the large (L) and medium (M) sizes make up the biggest share of revenue, shown by the wide yellow and orange sections. Small (S) pizzas consistently contribute the least, and XL and XXL sizes rarely appear. The Classic category has the highest total height, meaning it generates the most revenue overall. Overall, the chart shows that larger sizes dominate revenue regardless of pizza type.</p>
+          </figure>
+
+          <figure class="card">
+            <img src="./top_pizza_by_revenue.jpg" alt="Top pizza by revenue" loading="lazy">
+            <figcaption class="caption">top_pizza_by_revenue.jpg</figcaption>
+            <p class="desc">This horizontal ranking chart displays the five pizzas that generate the most revenue. The bars show that The Thai Chicken Pizza leads the list, followed closely by The Barbecue Chicken Pizza and The California Chicken Pizza. The Classic Deluxe Pizza and Spicy Italian Pizza come next with slightly lower totals. Sorted descending, the visualization makes it easy to compare performance and see that all five pizzas bring in strong revenue with only mild differences between them.</p>
+          </figure>
+        </section>
+
+      <!-- Embedded visualization: pizza_unitprice_ingredients.html -->
+      <section id="unitprice" class="viz-section">
+        <h2 style="margin:14px 0 8px 0">Unit price visualization</h2>
+        <p style="margin:0 0 6px 0; color:#666; font-size:13px">Interactive chart embedded below — you can also open it as a standalone page.</p>
+        <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html" title="Unit price visualization">
+          Your browser does not support iframes — <a href="./pizza_unitprice_ingredients.html">open visualization</a>
+        </iframe>
+      </section>
+
+      </main>
+    </div>
+  </body>
+</html>
