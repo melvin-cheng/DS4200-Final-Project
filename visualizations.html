@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>All Visualizations — Pizza Report</title>
     <link rel="stylesheet" href="./main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+      /* Styles for the scatter plot */
+      #price-popularity-chart {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      
+      .dot {
+        cursor: pointer;
+      }
+      
+      .dot:hover {
+        stroke: #333;
+        stroke-width: 3px;
+      }
+      
+      .tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        pointer-events: none;
+        display: none;
+        z-index: 1000;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -25,7 +56,6 @@
       <main>
         <section class="overview">
           <h1>All visualizations</h1>
-          <p class="short" style="margin:6px 0 8px 0; color:var(--muted)">Browse each chart and its supporting description below — click a card to open the detailed page for any visualization.</p>
 
           <div class="viz-links">
             <a class="viz-link" href="./heatmap_orders.html">
@@ -52,7 +82,6 @@
         <!-- Embedded interactive visualization -->
         <section id="unitprice" class="viz-section">
           <h2 style="margin:14px 0 8px 0">Unit price visualization</h2>
-          <p style="margin:0 0 6px 0; color:#666; font-size:13px">Interactive Altair visualization (same content as the single-page export).</p>
           <p class="desc">Altair — This Altair figure links pizza prices with ingredient demand to help explore patterns in the menu. The scatter plot on the left shows the unit price of every pizza by category. This shows how Classic pizzas cluster tightly around mid-range prices, and Chicken and Supreme pizzas show more differences. When the x-axis is dragged to highlight a specific price range, the bar chart on the right updates to show the top five ingredients used in the pizzas within that selected price window, along with the total quantities sold. This interaction makes it easy to see which ingredients appear most often in higher-priced pizzas versus lower-priced ones, and how ingredient popularity shifts across categories and price points. Overall, the graph helps connect pricing, category differences, and topping demand in one combined view.</p>
 
           <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html" title="Unit price visualization">
@@ -60,9 +89,21 @@
           </iframe>
         </section>
 
+        <!-- New Price vs Popularity Scatter Plot -->
+        <section id="price-popularity" class="viz-section">
+          <h2 style="margin:14px 0 8px 0">Price vs Popularity Analysis</h2>
+          <p class="desc">D3.js — This scatter plot explores the relationship between pizza pricing and popularity (total orders). Each circle represents a different pizza type, with colors indicating the category (Chicken, Classic, Supreme, or Veggie). The horizontal position shows the average price of each pizza, while the vertical position shows how many times it was ordered throughout the year. Hover over any circle to see detailed information about that specific pizza. This visualization helps identify whether price affects ordering patterns and which pizzas offer the best balance of popularity and profitability for the restaurant.</p>
+          
+          <div id="price-popularity-chart">
+            <div id="chart"></div>
+            <div class="tooltip"></div>
+          </div>
+        </section>
+
       </main>
     </div>
-  </body>
 
-  <!-- iframe autosize/scale helper removed as requested -->
+    <!-- Load the scatter plot script -->
+    <script src="./d3.js"></script>
+  </body>
 </html>
