@@ -1,9 +1,8 @@
-/* Page styles for index.html - Pizza Visualizations */
 :root { 
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; 
   color: #111;
   
-  /* Define missing CSS variables */
+  
   --sm-shadow: 0 2px 8px rgba(0,0,0,0.08);
   --accent: #3b82f6;
   --muted: #666;
@@ -29,7 +28,6 @@ p.lead {
   color: #555;
 }
 
-/* ---------------- Header / navigation ---------------- */
 .site-header { 
   display: flex; 
   align-items: center; 
@@ -102,22 +100,22 @@ p.lead {
 }
 
 .overview { 
-  background: white;  /* Changed to solid white for better contrast */
-  padding: 24px;  /* Increased padding for better spacing */
+  background: white;  
+  padding: 24px;  
   border-radius: 12px; 
   box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
-  margin-bottom: 24px;  /* Increased margin */
+  margin-bottom: 24px;
 }
 
 .overview h2 { 
-  margin: 0 0 12px 0;  /* Added bottom margin */
+  margin: 0 0 12px 0; 
   color: #111;
   font-size: 24px;
-  text-align: left;  /* Explicit alignment */
+  text-align: left; 
 }
 
 .overview h3 { 
-  margin: 20px 0 12px 0;  /* Consistent margins */
+  margin: 20px 0 12px 0;
   color: #222;
   font-size: 18px;
   font-weight: 600;
@@ -125,32 +123,32 @@ p.lead {
 }
 
 .overview p { 
-  margin: 0 0 16px 0;  /* Consistent bottom margin */
+  margin: 0 0 16px 0; 
   color: #444;
-  line-height: 1.6;  /* Better readability */
-  text-align: left;  /* Explicit alignment */
+  line-height: 1.6;
+  text-align: left; 
 }
 
-/* References - improved structure */
+
 .references { 
   display: flex; 
   flex-direction: column; 
-  gap: 16px;  /* Increased gap */
-  margin: 20px 0 0 0;  /* Clear top margin */
-  padding: 0;  /* Remove any padding */
+  gap: 16px;  
+  margin: 20px 0 0 0; 
+  padding: 0; 
 }
 
 .ref { 
-  padding: 0;  /* Ensure no extra padding */
-  margin: 0;  /* Clear margins */
+  padding: 0;  
+  margin: 0;  
 }
 
 .ref a { 
   color: #3b82f6; 
   font-weight: 600; 
   text-decoration: none;
-  display: block;  /* Make links block-level */
-  margin-bottom: 6px;  /* Space between link and description */
+  display: block; 
+  margin-bottom: 6px; 
   font-size: 15px;
 }
 
@@ -159,49 +157,47 @@ p.lead {
 }
 
 .ref p { 
-  margin: 0;  /* Remove all margins */
-  padding: 0;  /* Remove padding */
+  margin: 0;  
+  padding: 0;  
   color: #666; 
   font-size: 14px;
   line-height: 1.5;
-  text-align: left;  /* Explicit alignment */
+  text-align: left;  
 }
 
-/* Findings / future work - IMPROVED ALIGNMENT */
 .findings { 
-  background: white;  /* Solid white background */
-  padding: 24px;  /* Consistent padding with overview */
+  background: white;
+  padding: 24px; 
   border-radius: 12px; 
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-top: 24px;
 }
 
 .findings h2 { 
-  margin: 0 0 12px 0;  /* Consistent with overview */
+  margin: 0 0 12px 0;  
   color: #111;
   font-size: 24px;
   text-align: left;
 }
 
 .findings p { 
-  color: #444;  /* Darker for better readability */
-  line-height: 1.6;  /* Increased line height */
-  margin: 0 0 16px 0;  /* Consistent bottom margin */
-  text-align: left;  /* Explicit alignment */
+  color: #444;  
+  line-height: 1.6;  
+  margin: 0 0 16px 0; 
+  text-align: left; 
 }
 
 .findings p:last-child {
-  margin-bottom: 0;  /* Remove margin from last paragraph */
+  margin-bottom: 0; 
 }
 
 .future { 
-  margin-top: 24px;  /* More space before future work */
-  padding-top: 20px;  /* More padding */
-  border-top: 1px solid rgba(0,0,0,0.08);  /* Lighter border */
+  margin-top: 24px;  
+  padding-top: 20px; 
 }
 
 .future h3 { 
-  margin: 0 0 12px 0;  /* Consistent margins */
+  margin: 0 0 12px 0;  
   color: #222;
   font-size: 18px;
   font-weight: 600;
@@ -209,13 +205,13 @@ p.lead {
 }
 
 .future p {
-  margin: 0;  /* Remove margin since it's the last element */
+  margin: 0;  
   color: #444;
   line-height: 1.6;
   text-align: left;
 }
 
-/* ---------------- Gallery grid ---------------- */
+/* Gallery*/
 .gallery { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(720px, 1fr)); 
@@ -245,7 +241,6 @@ p.lead {
   font-size: 15px;
 }
 
-/* descriptive caption text for visualizations */
 .desc { 
   margin-top: 10px; 
   color: #444; 
@@ -262,7 +257,6 @@ p.lead {
   padding: 0 10px;
 }
 
-/* Variant used by standalone visualization pages */
 .viz-card { 
   background: transparent; 
   box-shadow: none; 
@@ -273,7 +267,6 @@ p.lead {
   border-radius: 8px;
 }
 
-/* ---------------- Responsive design ---------------- */
 @media (max-width:1300px) {
   .gallery { 
     grid-template-columns: repeat(auto-fit, minmax(560px, 1fr)); 
@@ -318,7 +311,7 @@ p.lead {
     font-size: 13px;
   }
   
-  /* Mobile adjustments for text sections */
+
   .overview, .findings {
     padding: 16px;
   }
@@ -332,7 +325,6 @@ p.lead {
   }
 }
 
-/* embedding/preview for external single-file visualizations */
 .viz-section { 
   margin-top: 26px; 
   display: flex; 
@@ -361,7 +353,6 @@ p.lead {
   }
 }
 
-/* viz-links grid */
 .viz-links { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 

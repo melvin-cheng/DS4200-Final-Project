@@ -1,15 +1,15 @@
 d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
     
-    // Process data: group by pizza name to get average price and total orders
+
     const pizzaMap = {};
     
-    // Loop through each row in the CSV
+
     rawData.forEach(function(row) {
         const pizzaName = row.pizza_name;
         const price = parseFloat(row.unit_price);
         const quantity = parseInt(row.quantity);
         
-        // If this pizza doesn't exist yet, create it
+    
         if (!pizzaMap[pizzaName]) {
             pizzaMap[pizzaName] = {
                 name: pizzaName,
@@ -20,14 +20,13 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
                 size: row.pizza_size
             };
         }
-        
-        // Add to totals
+
         pizzaMap[pizzaName].totalOrders += quantity;
         pizzaMap[pizzaName].totalPrice += price;
         pizzaMap[pizzaName].priceCount += 1;
     });
     
-    // Convert map to array and calculate average prices
+
     const data = [];
     for (let pizza in pizzaMap) {
         data.push({
@@ -38,15 +37,15 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         });
     }
     
-    // Sort by orders to get top pizzas (optional)
+
     data.sort((a, b) => b.orders - a.orders);
     
-    // Set dimensions and margins
+   
     const margin = {top: 40, right: 40, bottom: 80, left: 80};
     const width = 800 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
     
-    // Create SVG
+
     const svg = d3.select("#chart")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -54,22 +53,21 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
     
-    // Find min and max for scales
+  
     const xMin = d3.min(data, d => d.avgPrice) - 2;
     const xMax = d3.max(data, d => d.avgPrice) + 2;
     const yMax = d3.max(data, d => d.orders) + 500;
     
-    // Create X scale (average price)
+    
     const xScale = d3.scaleLinear()
         .domain([xMin, xMax])
         .range([0, width]);
     
-    // Create Y scale (total orders)
     const yScale = d3.scaleLinear()
         .domain([0, yMax])
         .range([height, 0]);
     
-    // Create color scale for categories
+  
     const colorScale = d3.scaleOrdinal()
         .domain(["Chicken", "Classic", "Supreme", "Veggie"])
         .range(["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4"]);
@@ -120,15 +118,13 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .style("stroke-width", "2px")
         .style("cursor", "pointer");
     
-    // Add hover effects
+    // Add effects
     circles.on("mouseover", function(event, d) {
-        // Make circle bigger
         d3.select(this)
             .attr("r", 10)
             .style("opacity", 1)
             .style("stroke", "#333");
         
-        // Show tooltip
         tooltip.style("display", "block")
             .html(`
                 <strong>${d.name}</strong><br>
@@ -141,17 +137,15 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
     });
     
     circles.on("mouseout", function(event, d) {
-        // Reset circle
         d3.select(this)
             .attr("r", 7)
             .style("opacity", 0.7)
             .style("stroke", "white");
         
-        // Hide tooltip
         tooltip.style("display", "none");
     });
     
-    // Add title
+    // title
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", -15)
@@ -159,8 +153,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .style("font-size", "18px")
         .style("font-weight", "bold")
         .text("Pizza Price vs Popularity Analysis");
-    
-    // Add simple legend for categories
+    // Legend
     const legend = svg.append("g")
         .attr("transform", `translate(${width - 120}, 20)`);
     
@@ -174,7 +167,6 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .text("Category:");
     
     categories.forEach((category, i) => {
-        // Add colored circle
         legend.append("circle")
             .attr("cx", 10)
             .attr("cy", 15 + i * 20)
