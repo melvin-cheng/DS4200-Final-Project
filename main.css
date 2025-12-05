@@ -211,7 +211,7 @@ p.lead {
   text-align: left;
 }
 
-/* Gallery*/
+/* The Gallery holding the visualizations*/
 .gallery { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(720px, 1fr)); 

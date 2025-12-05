@@ -1,6 +1,4 @@
 d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
-    
-
     const pizzaMap = {};
     
 
