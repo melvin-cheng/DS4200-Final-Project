@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Figure 2 — Size Contribution</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <div class="brand">
+        <img src="./images/logo.png" class="brand-logo" onerror="this.style.visibility='hidden'">
+        <div class="brand-text">
+          <div class="site-title">Pizza Report</div>
+          <div class="site-tag">Figure 2 — Size Contribution</div>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="./index.html">Home</a>
+        <a href="./visualizations.html">All visualizations</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Figure 2 — Size Contribution to Total Sales by Category</h1>
+
+      <!-- embedded altair vis -->
+      <iframe 
+        src="./update_size_contribution.html" 
+        style="width: 100%; height: 600px; border: none;">
+      </iframe>
+
+      <section style="margin-top: 25px;">
+        <h2>Figure 2 Analysis</h2>
+        <p>
+          Figure 2 shows how different pizza sizes contribute to total revenue within each category. Classic pizzas have the highest total revenue at about $220,000. Supreme pizzas follow with around $208,000, Veggie pizzas reach about $195,000, and Chicken pizzas total roughly $198,000. Within every category, medium and large pizzas contribute most to the revenue. In Classic pizzas, medium and large sizes together contribute close to $160,000 of the total. Supreme pizzas are similar, with these two sizes adding up to around $150,000. Chicken and Veggie pizzas also show strong revenue from medium and large sizes, each reaching well over $120,000. Small pizzas add a smaller amount, usually between $30,000 and $50,000, depending on the category. XL and XXL sizes contribute very little, often below $20,000, and in some categories, closer to $10,000. Overall, the numbers show that most revenue comes from the middle sizes, while very small and very large sizes contribute only a small share. This means that customers focus their purchases on medium and large pizzas, making these sizes the main drivers of sales across every category.
+        </p>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
