@@ -159,7 +159,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .style("text-anchor", "middle")
         .style("font-size", "22px")
         .style("font-weight", "bold")
-        .text("Pizza Price vs Popularity (Includes Sizes)");
+        .text("Figure 5: Pizza Price vs Popularity");
 
     // category legend
     const legend = svg.append("g")
