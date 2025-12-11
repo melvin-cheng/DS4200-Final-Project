@@ -1,48 +1,28 @@
 d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
-    const pizzaMap = {};
-    
 
-    rawData.forEach(function(row) {
-        const pizzaName = row.pizza_name;
-        const price = parseFloat(row.unit_price);
-        const quantity = parseInt(row.quantity);
-        
-    
-        if (!pizzaMap[pizzaName]) {
-            pizzaMap[pizzaName] = {
-                name: pizzaName,
-                totalOrders: 0,
-                totalPrice: 0,
-                priceCount: 0,
-                category: row.pizza_category,
-                size: row.pizza_size
-            };
-        }
+    // PROCESS RAW DATA (NO AGGREGATION)
+    const data = rawData.map(d => ({
+        name: d.pizza_name,
+        price: parseFloat(d.unit_price),
+        category: d.pizza_category,
+        size: d.pizza_size,
+        quantity: +d.quantity
+    }));
 
-        pizzaMap[pizzaName].totalOrders += quantity;
-        pizzaMap[pizzaName].totalPrice += price;
-        pizzaMap[pizzaName].priceCount += 1;
-    });
-    
+    // SIZE → CIRCLE RADIUS SCALE
+    const sizeScale = d3.scaleOrdinal()
+        .domain(["S", "M", "L", "XL", "XXL"])
+        .range([4, 6, 9, 12, 15]);   // bigger pizza → bigger circle
 
-    const data = [];
-    for (let pizza in pizzaMap) {
-        data.push({
-            name: pizzaMap[pizza].name,
-            avgPrice: pizzaMap[pizza].totalPrice / pizzaMap[pizza].priceCount,
-            orders: pizzaMap[pizza].totalOrders,
-            category: pizzaMap[pizza].category
-        });
-    }
-    
+    // CATEGORY COLOR SCALE
+    const colorScale = d3.scaleOrdinal()
+        .domain(["Chicken", "Classic", "Supreme", "Veggie"])
+        .range(["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4"]);
 
-    data.sort((a, b) => b.orders - a.orders);
-    
-   
-    const margin = {top: 40, right: 40, bottom: 80, left: 80};
+    // SVG SETUP
+    const margin = {top: 50, right: 50, bottom: 70, left: 70};
     const width = 800 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
-    
 
     const svg = d3.select("#chart")
         .append("svg")
@@ -50,136 +30,118 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
-    
-  
-    const xMin = d3.min(data, d => d.avgPrice) - 2;
-    const xMax = d3.max(data, d => d.avgPrice) + 2;
-    const yMax = d3.max(data, d => d.orders) + 500;
-    
-    
+
+    // X SCALE - Price
     const xScale = d3.scaleLinear()
-        .domain([xMin, xMax])
-        .range([0, width]);
-    
+        .domain(d3.extent(data, d => d.price))
+        .range([0, width])
+        .nice();
+
+    // Y SCALE - Quantity (popularity)
     const yScale = d3.scaleLinear()
-        .domain([0, yMax])
-        .range([height, 0]);
-    
-  
-    const colorScale = d3.scaleOrdinal()
-        .domain(["Chicken", "Classic", "Supreme", "Veggie"])
-        .range(["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4"]);
-    
-    // Add X axis
+        .domain([0, d3.max(data, d => d.quantity)])
+        .range([height, 0])
+        .nice();
+
+    // AXES
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickFormat(d => "$" + d.toFixed(2)));
-    
-    // Add Y axis
+        .call(d3.axisBottom(xScale).tickFormat(d => "$" + d));
+
     svg.append("g")
         .call(d3.axisLeft(yScale));
-    
-    // Add X axis label
+
+    // AXIS LABELS
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", height + 50)
         .style("text-anchor", "middle")
         .style("font-size", "14px")
-        .style("font-weight", "bold")
-        .text("Average Price ($)");
-    
-    // Add Y axis label
+        .text("Unit Price ($)");
+
     svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", -50)
         .attr("x", -height / 2)
         .style("text-anchor", "middle")
         .style("font-size", "14px")
-        .style("font-weight", "bold")
-        .text("Total Orders");
-    
-    // Create tooltip div
+        .text("Quantity Ordered");
+
+    // TOOLTIP
     const tooltip = d3.select(".tooltip");
-    
-    // Add circles for each pizza
-    const circles = svg.selectAll(".dot")
+
+    // SCATTER PLOT POINTS
+    svg.selectAll(".dot")
         .data(data)
         .enter()
         .append("circle")
-        .attr("class", "dot")
-        .attr("cx", d => xScale(d.avgPrice))
-        .attr("cy", d => yScale(d.orders))
-        .attr("r", 7)
-        .style("fill", d => colorScale(d.category))
-        .style("opacity", 0.7)
+        .attr("cx", d => xScale(d.price))
+        .attr("cy", d => yScale(d.quantity))
+        .attr("r", d => sizeScale(d.size))
+        .attr("fill", d => colorScale(d.category))
+        .style("opacity", 0.65)
         .style("stroke", "white")
-        .style("stroke-width", "2px")
-        .style("cursor", "pointer");
-    
-    // Add effects
-    circles.on("mouseover", function(event, d) {
-        d3.select(this)
-            .attr("r", 10)
-            .style("opacity", 1)
-            .style("stroke", "#333");
-        
-        tooltip.style("display", "block")
-            .html(`
-                <strong>${d.name}</strong><br>
-                Category: ${d.category}<br>
-                Avg Price: $${d.avgPrice.toFixed(2)}<br>
-                Total Orders: ${d.orders.toLocaleString()}
-            `)
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY - 10) + "px");
-    });
-    
-    circles.on("mouseout", function(event, d) {
-        d3.select(this)
-            .attr("r", 7)
-            .style("opacity", 0.7)
-            .style("stroke", "white");
-        
-        tooltip.style("display", "none");
-    });
-    
-    // title
+        .style("cursor", "pointer")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .style("opacity", 1)
+                .attr("stroke", "#333")
+                .attr("stroke-width", 2);
+
+            tooltip.style("display", "block")
+                .html(`
+                    <strong>${d.name}</strong><br>
+                    Size: ${d.size}<br>
+                    Category: ${d.category}<br>
+                    Price: $${d.price}<br>
+                    Quantity: ${d.quantity}
+                `)
+                .style("left", (event.pageX + 12) + "px")
+                .style("top", (event.pageY - 12) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .style("opacity", 0.65)
+                .attr("stroke", "white");
+
+            tooltip.style("display", "none");
+        });
+
+    // TITLE
     svg.append("text")
         .attr("x", width / 2)
-        .attr("y", -15)
+        .attr("y", -20)
         .style("text-anchor", "middle")
-        .style("font-size", "18px")
+        .style("font-size", "20px")
         .style("font-weight", "bold")
-        .text("Pizza Price vs Popularity Analysis");
-    // Legend
+        .text("Pizza Price vs Quantity Ordered (by Size & Category)");
+
+    // LEGEND
     const legend = svg.append("g")
-        .attr("transform", `translate(${width - 120}, 20)`);
-    
+        .attr("transform", `translate(${width - 150}, 10)`);
+
     const categories = ["Chicken", "Classic", "Supreme", "Veggie"];
-    
+
     legend.append("text")
-        .attr("x", 0)
         .attr("y", -5)
+        .style("font-size", "13px")
         .style("font-weight", "bold")
-        .style("font-size", "12px")
-        .text("Category:");
-    
-    categories.forEach((category, i) => {
+        .text("Category");
+
+    categories.forEach((cat, i) => {
         legend.append("circle")
             .attr("cx", 10)
-            .attr("cy", 15 + i * 20)
+            .attr("cy", 15 + i * 22)
             .attr("r", 6)
-            .style("fill", colorScale(category))
-            .style("opacity", 0.7);
-        
-        // Add label
+            .style("fill", colorScale(cat));
+
         legend.append("text")
-            .attr("x", 20)
-            .attr("y", 19 + i * 20)
-            .style("font-size", "11px")
-            .text(category);
+            .attr("x", 25)
+            .attr("y", 20 + i * 22)
+            .style("font-size", "12px")
+            .text(cat);
     });
-    
+
 }).catch(function(error) {
-    console.log("Error loading the CSV file:", error);
+    console.log("Error loading CSV:", error);
 });
