@@ -36,9 +36,9 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         category: d.category
     }));
 
-    // jitter
+// jitter
 data.forEach(d => {
-    d.jitter = (Math.random() - 0.5) * 0.6; 
+    d.jitter = (Math.random() - 0.5) * 2.0; 
 });
 
     console.log("POINT COUNT:", data.length);
