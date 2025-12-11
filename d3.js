@@ -27,7 +27,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         pizzaSizeMap[key].priceCount += 1;
     });
 
-    // convert dictionary to array for plotting
+    // convert to array
     const data = Object.values(pizzaSizeMap).map(d => ({
         name: d.name,
         size: d.size,
@@ -36,14 +36,14 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         category: d.category
     }));
 
-// jitter
-data.forEach(d => {
-    d.jitter = (Math.random() - 0.5) * 2.0; 
-});
+    // jitter
+    data.forEach(d => {
+        d.jitter = (Math.random() - 0.5) * 2.0; 
+    });
 
     console.log("POINT COUNT:", data.length);
 
-    // CHART SETUP
+    // setup chart
     const margin = {top: 40, right: 40, bottom: 80, left: 80};
     const width = 800 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
@@ -55,7 +55,7 @@ data.forEach(d => {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Scales
+    // scales
     const xMin = d3.min(data, d => d.avgPrice) - 2;
     const xMax = d3.max(data, d => d.avgPrice) + 2;
     const yMax = d3.max(data, d => d.orders) + 500;
@@ -68,11 +68,12 @@ data.forEach(d => {
         .domain([0, yMax])
         .range([height, 0]);
 
+    // warm color palette
     const colorScale = d3.scaleOrdinal()
         .domain(["Chicken", "Classic", "Supreme", "Veggie"])
-        .range(["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4"]);
+        .range(["#d1495b", "#edae49", "#f9df74", "#b5651d"]);
 
-    // Axes
+    // axes
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale).tickFormat(d => "$" + d.toFixed(2)));
@@ -80,7 +81,7 @@ data.forEach(d => {
     svg.append("g")
         .call(d3.axisLeft(yScale));
 
-    // Labels
+    // labels
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", height + 50)
@@ -98,25 +99,25 @@ data.forEach(d => {
         .style("font-weight", "bold")
         .text("Total Orders");
 
-    // Tooltip reference
+    // tooltip 
     const tooltip = d3.select(".tooltip");
 
-    // Draw circles
+    // draw circles using jitter
     const circles = svg.selectAll(".dot")
         .data(data)
         .enter()
         .append("circle")
         .attr("class", "dot")
-        .attr("cx", d => xScale(d.avgPrice))
+        .attr("cx", d => xScale(d.avgPrice + d.jitter))
         .attr("cy", d => yScale(d.orders))
-        .attr("r", 6.5)   // slightly smaller since more points now
+        .attr("r", 6.5)
         .style("fill", d => colorScale(d.category))
         .style("opacity", 0.75)
         .style("stroke", "white")
         .style("stroke-width", "2px")
         .style("cursor", "pointer");
 
-    // Hover interactions
+    // hover feature
     circles.on("mouseover", function(event, d) {
         d3.select(this)
             .attr("r", 10)
@@ -144,7 +145,7 @@ data.forEach(d => {
         tooltip.style("display", "none");
     });
 
-    // Title
+    // title
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", -15)
@@ -153,7 +154,7 @@ data.forEach(d => {
         .style("font-weight", "bold")
         .text("Pizza Price vs Popularity (Includes Sizes)");
 
-    // Legend
+    // legend
     const legend = svg.append("g")
         .attr("transform", `translate(${width - 120}, 20)`);
 
