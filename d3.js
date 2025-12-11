@@ -38,12 +38,18 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
 
     // jitter
     data.forEach(d => {
-        d.jitter = (Math.random() - 0.5) * 2.0; 
+        d.jitter = (Math.random() - 0.5) * 2.0;
     });
 
     console.log("POINT COUNT:", data.length);
 
-    // setup chart
+    // size → radius scale
+    const radiusScale = d3.scaleOrdinal()
+        .domain(["S", "M", "L", "XL"])
+        .range([5, 7, 9, 11]);
+
+
+    // chart setup
     const margin = {top: 40, right: 40, bottom: 80, left: 80};
     const width = 800 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
@@ -72,6 +78,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
     const colorScale = d3.scaleOrdinal()
         .domain(["Chicken", "Classic", "Supreme", "Veggie"])
         .range(["#d1495b", "#edae49", "#f9df74", "#b5651d"]);
+
 
     // axes
     svg.append("g")
@@ -102,7 +109,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
     // tooltip 
     const tooltip = d3.select(".tooltip");
 
-    // draw circles using jitter
+    // draw circles
     const circles = svg.selectAll(".dot")
         .data(data)
         .enter()
@@ -110,17 +117,17 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .attr("class", "dot")
         .attr("cx", d => xScale(d.avgPrice + d.jitter))
         .attr("cy", d => yScale(d.orders))
-        .attr("r", 6.5)
+        .attr("r", d => radiusScale(d.size))
         .style("fill", d => colorScale(d.category))
         .style("opacity", 0.75)
         .style("stroke", "white")
         .style("stroke-width", "2px")
         .style("cursor", "pointer");
 
-    // hover feature
+    // hover effect
     circles.on("mouseover", function(event, d) {
         d3.select(this)
-            .attr("r", 10)
+            .attr("r", radiusScale(d.size) + 3)
             .style("opacity", 1)
             .style("stroke", "#333");
 
@@ -136,14 +143,15 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
             .style("top", (event.pageY - 10) + "px");
     });
 
-    circles.on("mouseout", function() {
+    circles.on("mouseout", function(event, d) {
         d3.select(this)
-            .attr("r", 6.5)
+            .attr("r", radiusScale(d.size))
             .style("opacity", 0.75)
             .style("stroke", "white");
 
         tooltip.style("display", "none");
     });
+
 
     // title
     svg.append("text")
@@ -154,7 +162,7 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .style("font-weight", "bold")
         .text("Pizza Price vs Popularity (Includes Sizes)");
 
-    // legend
+    // category legend
     const legend = svg.append("g")
         .attr("transform", `translate(${width - 120}, 20)`);
 
