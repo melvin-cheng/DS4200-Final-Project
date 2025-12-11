@@ -1,6 +1,6 @@
 d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
 
-    // group by pizza name & size
+    // group data by pizza and size
     const pizzaSizeMap = {};
 
     rawData.forEach(function(row) {
@@ -38,21 +38,21 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
 
     // jitter
     data.forEach(d => {
-        d.jitter = (Math.random() - 0.5) * 2.0;
+        d.jitter = (Math.random() - 0.5) * 0.4;
     });
 
     console.log("POINT COUNT:", data.length);
 
-    // size → radius scale
+    // size to radius scale
     const radiusScale = d3.scaleOrdinal()
         .domain(["S", "M", "L", "XL"])
         .range([5, 7, 9, 11]);
 
 
-    // chart setup
-    const margin = {top: 40, right: 40, bottom: 80, left: 80};
-    const width = 800 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    // set up chart area
+    const margin = {top: 40, right: 150, bottom: 80, left: 80};
+    const width = 900 - margin.left - margin.right;
+    const height = 520 - margin.top - margin.bottom;
 
     const svg = d3.select("#chart")
         .append("svg")
@@ -62,9 +62,9 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // scales
-    const xMin = d3.min(data, d => d.avgPrice) - 2;
-    const xMax = d3.max(data, d => d.avgPrice) + 2;
-    const yMax = d3.max(data, d => d.orders) + 500;
+    const xMin = d3.min(data, d => d.avgPrice) - 1;
+    const xMax = d3.max(data, d => d.avgPrice) + 1;
+    const yMax = d3.max(data, d => d.orders) + 300;
 
     const xScale = d3.scaleLinear()
         .domain([xMin, xMax])
@@ -91,22 +91,22 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
     // labels
     svg.append("text")
         .attr("x", width / 2)
-        .attr("y", height + 50)
+        .attr("y", height + 55)
         .style("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "15px")
         .style("font-weight", "bold")
         .text("Average Price ($)");
 
     svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", -50)
+        .attr("y", -55)
         .attr("x", -height / 2)
         .style("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "15px")
         .style("font-weight", "bold")
         .text("Total Orders");
 
-    // tooltip 
+    // add tooltip
     const tooltip = d3.select(".tooltip");
 
     // draw circles
@@ -119,12 +119,12 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
         .attr("cy", d => yScale(d.orders))
         .attr("r", d => radiusScale(d.size))
         .style("fill", d => colorScale(d.category))
-        .style("opacity", 0.75)
+        .style("opacity", 0.65)
         .style("stroke", "white")
         .style("stroke-width", "2px")
         .style("cursor", "pointer");
 
-    // hover effect
+    // hover
     circles.on("mouseover", function(event, d) {
         d3.select(this)
             .attr("r", radiusScale(d.size) + 3)
@@ -139,55 +139,77 @@ d3.csv("Data Model - Pizza Sales.csv").then(function(rawData) {
                 Avg Price: $${d.avgPrice.toFixed(2)}<br>
                 Total Orders: ${d.orders.toLocaleString()}
             `)
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY - 10) + "px");
+            .style("left", (event.pageX + 12) + "px")
+            .style("top", (event.pageY - 20) + "px");
     });
 
-    circles.on("mouseout", function(event, d) {
+    circles.on("mouseout", function() {
         d3.select(this)
-            .attr("r", radiusScale(d.size))
-            .style("opacity", 0.75)
+            .attr("r", d => radiusScale(d.size))
+            .style("opacity", 0.65)
             .style("stroke", "white");
 
         tooltip.style("display", "none");
     });
 
-
     // title
     svg.append("text")
         .attr("x", width / 2)
-        .attr("y", -15)
+        .attr("y", -10)
         .style("text-anchor", "middle")
-        .style("font-size", "18px")
+        .style("font-size", "22px")
         .style("font-weight", "bold")
         .text("Pizza Price vs Popularity (Includes Sizes)");
 
     // category legend
     const legend = svg.append("g")
-        .attr("transform", `translate(${width - 120}, 20)`);
-
-    const categories = ["Chicken", "Classic", "Supreme", "Veggie"];
+        .attr("transform", `translate(${width + 20}, 10)`);
 
     legend.append("text")
         .attr("x", 0)
-        .attr("y", -5)
+        .attr("y", 0)
         .style("font-weight", "bold")
-        .style("font-size", "12px")
+        .style("font-size", "13px")
         .text("Category:");
 
-    categories.forEach((category, i) => {
+    ["Chicken", "Classic", "Supreme", "Veggie"].forEach((cat, i) => {
         legend.append("circle")
             .attr("cx", 10)
-            .attr("cy", 15 + i * 20)
-            .attr("r", 6)
-            .style("fill", colorScale(category))
-            .style("opacity", 0.75);
+            .attr("cy", 20 + i * 22)
+            .attr("r", 7)
+            .style("fill", colorScale(cat));
 
         legend.append("text")
-            .attr("x", 22)
-            .attr("y", 19 + i * 20)
-            .style("font-size", "11px")
-            .text(category);
+            .attr("x", 28)
+            .attr("y", 25 + i * 22)
+            .style("font-size", "12px")
+            .text(cat);
+    });
+
+    // size legend
+    const sizeLegend = svg.append("g")
+        .attr("transform", `translate(${width + 20}, 120)`);
+
+    sizeLegend.append("text")
+        .attr("x", 0)
+        .attr("y", 0)
+        .style("font-weight", "bold")
+        .style("font-size", "13px")
+        .text("Size:");
+
+    ["S", "M", "L", "XL"].forEach((s, i) => {
+        sizeLegend.append("circle")
+            .attr("cx", 10)
+            .attr("cy", 20 + i * 22)
+            .attr("r", radiusScale(s))
+            .style("fill", "#dddddd")
+            .style("stroke", "#555");
+
+        sizeLegend.append("text")
+            .attr("x", 28)
+            .attr("y", 25 + i * 22)
+            .style("font-size", "12px")
+            .text(s);
     });
 
 }).catch(function(error) {
