@@ -1,18 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- page metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <title>All Visualizations — Pizza Report</title>
 
-    <!-- load main stylesheet -->
+    <!-- main stylesheet -->
     <link rel="stylesheet" href="./main.css">
 
-    <!-- load d3 library for interactive scatter plot -->
+    <!-- d3 library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 
     <style>
-      /* style for price vs popularity chart container */
+      /* container for interactive scatter plot */
       #price-popularity-chart {
         background-color: white;
         padding: 20px;
@@ -20,10 +22,8 @@
         margin: 20px 0;
       }
 
-      /* style for scatter plot dots */
-      .dot {
-        cursor: pointer;
-      }
+      /* scatter plot dot styling */
+      .dot { cursor: pointer; }
 
       /* hover effect for dots */
       .dot:hover {
@@ -31,7 +31,7 @@
         stroke-width: 3px;
       }
 
-      /* tooltip styling */
+      /* tooltip styling used for hover details */
       .tooltip {
         position: absolute;
         background: rgba(0, 0, 0, 0.85);
@@ -49,100 +49,97 @@
   <body>
     <div class="container">
 
-      <!-- page header with logo & navigation -->
+      <!-- header section with logo and navigation menu -->
       <header class="site-header">
         <div class="brand">
-          <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
+          <!-- logo image -->
+          <img src="./images/logo.png" alt="Logo" class="brand-logo"
+               onerror="this.style.visibility='hidden'">
 
-          <!-- title area in header -->
+          <!-- project title and small label -->
           <div class="brand-text">
             <div class="site-title">Pizza Report</div>
             <div class="site-tag">All visualizations</div>
           </div>
         </div>
 
-        <!-- main navigation menu -->
+        <!-- navigation bar linking page sections -->
         <nav class="main-nav">
           <a href="./index.html">Home</a>
           <a class="cta" href="./visualizations.html">All visualizations</a>
           <a href="./heatmap_orders.html">Heatmap</a>
-          <a href="./update_size_contribution.html">Size contribution</a>
-          <a href="./update_top_pizza_by_revenue.html">Top pizzas</a>
+          <a href="./figure2_size_contribution.html">Size contribution</a>
+          <a href="./figure3_top_pizzas.html">Top pizzas</a>
         </nav>
       </header>
 
+
       <main>
 
-        <!-- section holding preview links for visualizations -->
+        <!-- section with preview cards for each visualization -->
         <section class="overview">
           <h1>All visualizations</h1>
 
           <div class="viz-links">
 
-            <!-- heatmap preview -->
+            <!-- preview link for heatmap figure -->
             <a class="viz-link" href="./heatmap_orders.html">
               <img src="./heatmap_orders.jpg" alt="Heatmap preview">
               <div class="title">Figure 1: Heatmap of Pizza Orders</div>
               <div class="short">Order volume by day/time.</div>
             </a>
 
-            <!-- updated figure 2 preview -->
+            <!-- preview link for size contribution figure -->
             <a class="viz-link" href="./figure2_size_contribution.html">
-              <img src="./update_fig2.png" alt="Updated size contribution preview">
+              <img src="./fig2.png" alt="Size contribution preview">
               <div class="title">Figure 2: Size Contribution</div>
-              <div class="short">A stacked bar chart showing revenue share by size.</div>
+              <div class="short">Revenue share by size.</div>
             </a>
 
-            <!-- updated figure 3 preview  -->
+            <!-- preview link for top pizzas figure -->
             <a class="viz-link" href="./figure3_top_pizzas.html">
-              <img src="./update_fig3.png" alt="Updated top pizza preview">
+              <img src="./fig3.png" alt="Top pizza preview">
               <div class="title">Figure 3: Top Pizzas</div>
-              <div class="short">Top 5 pizzas ranked by revenue.</div>
+              <div class="short">Top pizzas ranked by revenue.</div>
             </a>
 
           </div>
         </section>
 
-        <!-- embedded altair vis for unit price analysis -->
+
+        <!-- embed altair unit price visualization -->
         <section id="unitprice" class="viz-section">
 
           <h2 style="margin:14px 0 8px 0">Unit price visualization</h2>
 
-          <!-- description for unit price vis -->
+          <!-- unit price chart summary -->
           <p class="desc">
-            This Altair figure links pizza prices with ingredient demand to help explore patterns in the menu.
-            The scatter plot on the left shows the unit price of every pizza by category. This shows how Classic pizzas
-            cluster tightly around mid-range prices, and Chicken and Supreme pizzas show more differences. When the x-axis
-            is dragged to highlight a specific price range, the bar chart on the right updates to show the top five
-            ingredients used in the pizzas within that selected price window, along with the total quantities sold. This
-            interaction makes it easy to see which ingredients appear most often in higher-priced pizzas versus
-            lower-priced ones, and how ingredient popularity shifts across categories and price points.
+            this visualization connects pizza price patterns with ingredient demand. scatter plot shows price ranges for each category, and bar chart updates when price range is selected.
           </p>
 
-          <!-- iframe contains the altair interactive chart -->
-          <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html" title="Unit price visualization">
-            Your browser does not support iframes — <a href="./pizza_unitprice_ingredients.html">open visualization</a>
+          <!-- iframe with altair html file -->
+          <iframe class="viz-frame" src="./pizza_unitprice_ingredients.html"
+                  title="Unit price visualization">
+            your browser does not support iframes —
+            <a href="./pizza_unitprice_ingredients.html">open visualization</a>
           </iframe>
 
         </section>
 
-        <!-- section for d3 price vs popularity chart -->
+
+        <!-- section of interactive d3 price vs popularity plot -->
         <section id="price-popularity" class="viz-section">
 
           <h2 style="margin:14px 0 8px 0">Price vs Popularity Analysis</h2>
 
-          <!-- description for d3 scatter plot -->
+          <!-- scatterplot explanation -->
           <p class="desc">
-            This scatter plot explores the relationship between pizza pricing and popularity (total orders). Each
-            circle represents a different pizza type, with colors indicating the category (Chicken, Classic, Supreme, or
-            Veggie). The horizontal position shows the average price of each pizza, while the vertical position shows how
-            many times it was ordered throughout the year. Hover over any circle to see detailed information about that
-            specific pizza.
+            this scatter plot compares pizza price with total order count. dot color represents category, dot size represents pizza size, and tooltip provides detailed values.
           </p>
 
-          <!-- container for interactive d3 chart -->
+          <!-- container for d3 script -->
           <div id="price-popularity-chart">
-            <div id="chart"></div>
+            <div id="chart"></div>   
             <div class="tooltip"></div>
           </div>
 
@@ -151,7 +148,7 @@
       </main>
     </div>
 
-    <!-- load custom d3 script for scatter plot -->
+    <!-- generate interactive scatter plot -->
     <script src="./d3.js"></script>
 
   </body>

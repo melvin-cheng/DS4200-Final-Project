@@ -4,59 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Pizza Report — Home</title>
+
+    <!-- load stylesheet -->
     <link rel="stylesheet" href="./main.css">
   </head>
+
   <body>
     <div class="container">
+
+      <!-- page header -->
       <header class="site-header">
         <div class="brand">
+          <!-- site logo -->
           <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
-          <div class="brand-text"><div class="site-title">Pizza Report</div><div class="site-tag"></div></div>
+
+          <!-- site title -->
+          <div class="brand-text">
+            <div class="site-title">Pizza Report</div>
+            <div class="site-tag"></div>
+          </div>
         </div>
 
-<nav class="main-nav">
-  <a href="https://melvin-cheng.github.io/DS4200-Final-Project/index.html">Home</a>
-  <a class="cta" href="https://melvin-cheng.github.io/DS4200-Final-Project/visualizations.html">All visualizations</a>
-  <a href="https://melvin-cheng.github.io/DS4200-Final-Project/heatmap_orders.html">Heatmap</a>
-  <a href="https://melvin-cheng.github.io/DS4200-Final-Project/figure2_size_contribution.html">Size contribution</a>
-  <a href="https://melvin-cheng.github.io/DS4200-Final-Project/figure3_top_pizzas.html">Top pizzas</a>
-</nav>
+        <!-- main navigation -->
+        <nav class="main-nav">
+          <a href="./index.html">Home</a>
+          <a class="cta" href="./visualizations.html">All visualizations</a>
+          <a href="./heatmap_orders.html">Heatmap</a>
+          <a href="./figure2_size_contribution.html">Size contribution</a>
+          <a href="./figure3_top_pizzas.html">Top pizzas</a>
+        </nav>
       </header>
 
       <main>
+
+        <!-- project overview section -->
         <section class="overview">
           <h2>Project overview</h2>
+
           <p>
             For our group project, we chose to analyze pizza restaurant sales data. This is important because it helps businesses understand customer preferences, improve resource allocation, and make better decisions to increase profit. Our chosen dataset is especially interesting because it captures real-world information about order patterns, pricing, and pizza types. This allows businesses to learn more about what drives customer demand. By analyzing factors such as popular pizza sizes, peak order times, and revenue trends, we will be able to discover patterns about consumer behavior and business performance. This type of analysis is valuable for restaurant managers looking to optimize menus and staffing, as well as for anyone interested in how data analytics can improve the food service industry.
           </p>
 
+          <!-- dataset description -->
           <h3 style="margin-top:14px">About the data</h3>
           <p>
             We use the publicly available Pizza Restaurant Sales dataset from Kaggle, which provides a full year of customer order data from January 1 to December 31, 2015. The dataset is 5.58 MB and contains roughly 48,000 rows and 12 attributes, including order ID, date and time, pizza size, category, ingredients, quantity, and total price. For our project, we downloaded the dataset and converted it into a CSV file, allowing us to easily load it into Python and work with it using pandas. This cleaned and structured CSV version forms the foundation of our analysis and allows us to explore sales performance, identify top-selling items, and discover patterns in customer ordering behavior across the year.
-          </p>
 
-          <h3 style="margin-top:14px">References</h3>
-          <div class="references">
-            <div class="ref">
-              <a href="https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/DBrief/62_Pizza_Consumption_of_US_population_1720.pdf" target="_blank">Hoy et al., Pizza consumption in the U.S. (USDA)</a>
-              <p>The USDA has collected surveys of Americans and seeks to track the patterns and trends of pizza consumption. The study found that roughly 11% of Americans eat pizza on any given day, with the greatest consumption being during the times of lunch and dinner. Additionally, they highlight that pizza takes up 27% of the total calories one should typically consume per day. </p>
-            </div>
-            <div class="ref">
-              <a href="https://ideas.repec.org/a/ags/aolpei/254026.html" target="_blank">Vita et al., Future market of pizza: Which attributes matter?</a>
-              <p>This consumer study used analysis and survey methodology to identify the most important pizza attributes impacting a consumer's choice to buy certain types of pizza. Surveying 202 consumers, the research found that freshness and traditional hand-made preparation are the strongest indicators for consumer preference, accounting for 72.8% of purchases. Price ranks second at 12.7% of importance. The study revealed that consumers are willing to pay 10-20% premiums for organic ingredients but show little interest in low-calorie alternatives.</p>
-            </div>
-          </div>
 
-        <section class="findings" aria-label="Findings and future work">
-          <h2>Findings</h2>
-          <p>Overall, our visual analysis of the Pizza Restaurant Sales dataset helped us understand several important patterns in customer behavior and restaurant performance. One of the clearest findings is that large and medium pizzas bring in most of the revenue, which suggests that these sizes should continue to be the main focus of the menu. We also observed strong time-based patterns in the heatmap, especially the sharp increase in orders during the lunch hour and higher demand on Thursdays and Fridays — trends that suggest staff and prep should match those busy windows. Our category/ingredient analysis showed that certain pizza types rely heavily on specific ingredients and sizes, which can support smarter inventory planning.</p>
-
-          <div class="future">
-            <h3>Future work</h3>
-            <p>For future work, we would like to build a simple predictive model to estimate order volume throughout the day to improve planning. It would also be useful to analyze seasonality across months to check if these patterns persist over time. Another direction is customer segmentation to identify different ordering behavior groups. Together, these steps will help turn the insights into actionable recommendations for operations and strategy.</p>
-          </div>
-        </section>
-      </main>
-    </div>
-  </body>
-</html>

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Figure 3 — Top Pizzas</title>
 
-  <!-- main stylesheet -->
   <link rel="stylesheet" href="./main.css" />
 
   <style>
@@ -31,7 +30,6 @@
 <body>
   <div class="container">
 
-    <!-- header -->
     <header class="site-header">
       <div class="brand">
         <img src="./images/logo.png" alt="Logo" class="brand-logo" onerror="this.style.visibility='hidden'">
@@ -48,17 +46,15 @@
       </nav>
     </header>
 
-    <!-- main -->
     <main>
 
       <h1>Figure 3: Top Pizzas</h1>
 
-      <!-- embed interactive chart -->
-      <iframe src="./update_top_pizza_by_revenue.html" title="Top pizzas visualization">
+      <!-- embed altair visualization (correct file) -->
+      <iframe src="./fig3_top_pizzas_chart.html" title="Top pizzas visualization">
         Your browser does not support iframes.
       </iframe>
 
-      <!-- visualization analysis -->
       <div class="description-box">
         <p>
           Figure 3 shows the top five pizzas based on the selected metric. When the chart is sorted by
@@ -78,10 +74,8 @@
         </p>
 
         <p>
-          Overall, the results highlight that revenue and popularity do not always match, and switching
-          between the two views helps reveal whether a pizza is valuable because it sells at a high price
-          or because it sells often. Try switching between revenue and popularity to compare the two
-          patterns, and try hovering over the bars to learn more about the total price and order count.
+          Switching between metrics reveals whether a pizza earns more because of its price or because of its order volume.
+          Hovering over each bar shows more detail about total revenue and order count.
         </p>
       </div>
 
